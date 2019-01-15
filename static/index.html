@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>sign in please &middot; hello mouse</title>
+        <style>
+            body {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>hi mice!</h1>
+        <h2 id="msg">please sign in to access this page.</h2>
+        <img style="max-width: 100%" src="https://git.hellomouse.net/img/avatar_default.png" />
+        <br />
+        <input id="username" placeholder="username">
+        <input id="password" type="password" placeholder="password">
+        <button id="submit">i promise i'm not a cat!</button>
+        <script>
+            var referrer = document.referrer;
+            document.getElementById('submit').addEventListener('click', function (e) {
+                var data = {};
+                data['user'] = document.getElementById('username').value;
+                data['password'] =  document.getElementById('password').value;
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'auth', true);
+                xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+                xhr.onload = function () {
+                    try {
+                        var res = JSON.parse(this.responseText);
+                        if (res.ok) {
+                            document.getElementById('msg').innerHTML = 'Signed in! Sending you back to the old page...';
+                            setTimeout(function() {
+                                window.location = referrer;
+                            }, 500000);
+                        } else {
+                            document.getElementById('msg').innerHTML = 'Oops, please double-check your passwords.';
+                        }
+                    } catch (e) {
+                        document.getElementById('msg').innerHTML = 'Oops, backend server is down.';
+                    }
+                };
+                xhr.send(JSON.stringify(data));
+            });
+        </script>
+    </body>
+</html>

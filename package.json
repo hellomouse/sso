@@ -1,0 +1,26 @@
+{
+  "name": "hellomouse-sso",
+  "version": "1.0.0",
+  "description": "hellomouse sso solution",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hellomouse/sso.git"
+  },
+  "author": "Hellomouse, Ltd.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hellomouse/sso/issues"
+  },
+  "homepage": "https://github.com/hellomouse/sso#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "expressjs": "^1.0.1",
+    "htpasswd-js": "^1.0.2",
+    "redis": "^2.8.0"
+  }
+}
