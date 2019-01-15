@@ -12,7 +12,7 @@ const app = express();
 
 /* config */
 const port = process.env.PORT || 2971;
-const domain = process.env.DOMAIN || '*.hellomouse.net';
+const domain = process.env.DOMAIN || '.hellomouse.net';
 const htpasswd_loc = process.env.HTPASSWD || '/opt/tengine/conf/passwd';
 
 /* actual login request */
