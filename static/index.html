@@ -24,7 +24,7 @@
                 data['password'] =  document.getElementById('password').value;
 
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'auth', true);
+                xhr.open('POST', '/login/auth', true);
                 xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
                 xhr.onload = function () {
                     try {
@@ -33,7 +33,7 @@
                             document.getElementById('msg').innerHTML = 'Signed in! Sending you back to the old page...';
                             setTimeout(function() {
                                 window.location = referrer;
-                            }, 500000);
+                            }, 500);
                         } else {
                             document.getElementById('msg').innerHTML = 'Oops, please double-check your passwords.';
                         }
