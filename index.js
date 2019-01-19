@@ -12,7 +12,7 @@ const app = express();
 
 /* config */
 const port = process.env.PORT || 2971;
-const domain = process.env.DOMAIN || '.hellomouse.net';
+const domain = process.env.DOMAIN || 'hellomouse.net';
 const htpasswd_loc = process.env.HTPASSWD || '/opt/tengine/conf/passwd';
 
 /* actual login request */
@@ -25,8 +25,9 @@ app.post('/auth', function (req, res) {
   }).then((result) => {
     if (result) {
       const my_key = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-      client.set(my_key, 'potato', 'EX', 900000);
-      res.cookie('ra_cookie', my_key, {expires: new Date(Date.now() + 900000), secure: true, domain: domain});
+      /* 604800000 miliseconds = 1 week */
+      client.set(my_key, 'potato', 'EX', 604800000);
+      res.cookie('ra_cookie', my_key, {expires: new Date(Date.now() + 604800000), secure: true, domain: domain});
       res.end('{"ok":true}');
     } else {
       res.end('{"ok":false}');
@@ -34,14 +35,16 @@ app.post('/auth', function (req, res) {
   });
 });
 
+
 /* send static assets */
 app.use('/', express.static('static'));
 
 app.get('*', function(req, res) {
-  console.log(req.url);
-  res.end('wat');
+  console.log(req);
+  console.log(res);
+  res.end('');
 });
 
 app.listen(port, function () {
-    console.log(`Auth server running on 0.0.0.0:${port}`);
+    console.log(`SSO Authentication Server running on 0.0.0.0:${port}`);
 });
