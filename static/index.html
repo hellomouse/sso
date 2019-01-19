@@ -32,7 +32,8 @@
                         if (res.ok) {
                             document.getElementById('msg').innerHTML = 'Signed in! Sending you back to the old page...';
                             setTimeout(function() {
-                                window.location = referrer;
+                                if (!referrer) { window.location = window.origin }
+                                else { window.location = referrer };
                             }, 500);
                         } else {
                             document.getElementById('msg').innerHTML = 'Oops, please double-check your passwords.';
