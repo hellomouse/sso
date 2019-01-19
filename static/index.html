@@ -13,10 +13,11 @@
 				font-family: 'Arvo', serif;
             }
 
-			.bg {
+			#bg {
 				width: 100%;
 				height: 100%;
-				background-image: url(https://wallpaperscave.com/images/thumbs/wp-preview/800x500/18/02-22/anime-no-game-no-life-20499.jpg);
+/*				background-image: url(https://wallpaperscave.com/images/thumbs/wp-preview/800x500/18/02-22/anime-no-game-no-life-20499.jpg);
+				background-image: url('/login/bg.jpg');*/
 				background-size: cover;
 			}
 
@@ -70,14 +71,14 @@
 				color: #ef5b5b;
 			}
 
-			#show_password {
+			.opt-stuff {
 				text-decoration: underline;
 				position: relative;
 				top: 5px;
 				user-select: none;
 			}
 
-			#show_password:hover {
+			.opt-stuff:hover {
 				cursor: pointer;
 			}
         </style>
@@ -85,7 +86,7 @@
     <body>
 
 	<div class="bg-container">
-		<div class="bg"></div>
+		<div id="bg"></div>
 	</div>
 
 	<div id="logo">
@@ -219,7 +220,18 @@
 		<br><br>
 		</div>
 
+        <input id="username" placeholder="Username" autofocus autocomplete="off" maxlength=40><br>
+        <input id="password" type="password" placeholder="Password" autocomplete="off" onkeydown = "if (event.keyCode == 13) document.getElementById('submit').click()"><br>
+		<small class="opt-stuff" onclick="showPassword()">Show password</small> &middot; <small class="opt-stuff" onclick="localStorage.setItem('bowserinator-styles', '0')">I am a bad person</small>
+		<br><br>
+        <button id="submit" class="button-color">I'm not a cat!</button>
+		<p id="msg"></p>
+
 		<script>
+
+if (localStorage && localStorage.getItem("bowserinator-styles") && localStorage.getItem("bowserinator-styles") === "0") {
+} else {
+		document.getElementById('bg').style.backgroundImage = "url('/login/bg.jpg')";
 			/* Animate all the SVG paths (logo)
 			 * to randomly fill in on a line curve */
 			let pathEls = document.querySelectorAll('path');
@@ -236,17 +248,7 @@
 					autoplay: true
 				});
 			}
-		</script>
 
-
-        <input id="username" placeholder="Username" autofocus autocomplete="off" maxlength=40><br>
-        <input id="password" type="password" placeholder="Password" autocomplete="off" onkeydown = "if (event.keyCode == 13) document.getElementById('submit').click()"><br>
-		<small id="show_password" onclick="showPassword()">Show password</small>
-		<br><br>
-        <button id="submit" class="button-color">I'm not a cat!</button>
-		<p id="msg"></p>
-
-		<script>
 		/* Pulsate button colors */
 		let buttonColors = anime.timeline({
 			endDelay: 1000,
@@ -254,7 +256,7 @@
 			direction: 'alternate',
 			loop: true
 		}).add({ targets: '.button-color',  color: '#d5dbea', borderColor: '#d5dbea' }, 0);
-
+}
 		/* Randomize button text */
 		let loginLabels = [
 			'Log me in, please!',
