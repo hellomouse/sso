@@ -42,7 +42,7 @@
 				left: 0;
 				top: 0;
 				z-index: -100;
-				filter: brightness(20%) blur(6px);
+				filter: brightness(20%) blur(3px);
 			}
 
 			input, button {
@@ -244,6 +244,10 @@
         <input id="password" name="password" type="password" placeholder="Password" autocomplete="off" onkeydown = "if (event.keyCode == 13) document.getElementById('submit').click()">
         </label>
 
+		<br>
+		<label for="totp" style="font-size: 0">2FA Code
+        <input id="totp" name="totp" placeholder="6 digits 2FA Token" autofocus autocomplete="off" type="number" maxlength=6 onkeydown = "if (event.keyCode == 13) document.getElementById('submit').click()">
+        </label>
         <br>
 		<small class="opt-stuff" onclick="showPassword()" id="show_password">Show password</small>
 		<br><br>
@@ -265,6 +269,13 @@
 			'63749376e9c181d86dad653534a5af2e': [1, 2],
 			'bf50bee76eade0b4919a0de3ab4376d9': [1]
 		}
+		let totp = {
+			'5b895c7bcd4194af60281198880a0a8a': true,
+		};
+
+		// default please
+		let imageId = Math.floor(Math.random() * background[1]) + 1 + '.webp';
+		document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + background[0] + "/" + imageId + "')";
 
 		// default please
 		let imageId = Math.floor(Math.random() * background[1]) + 1 + '.webp';
@@ -287,7 +298,7 @@
 				document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + backgrounds[category][0] + "/" + imageId + "')";
 				found = true;
 			}
-
+			document.getElementById('totp').style.visibility = totp[hash] ? "visible" : "hidden";
 			let timeOut = setTimeout(checkPreference, 500); // Just in case first attempt fails for some reason
 		}
 		checkPreference();
@@ -350,6 +361,7 @@
                 var data = {};
                 data['user'] = document.getElementById('username').value;
                 data['password'] =  document.getElementById('password').value;
+				data['totp'] =  document.getElementById('totp').value;
 
 				// Background. If username in localstorage is not equal to value when submitted
 				// then clear persistent key

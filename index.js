@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const redis = require("redis");
 const crypto = require("crypto");
+const otplib = require("otplib");
+const bluebird = require("bluebird");
+bluebird.promisifyAll(redis);
 
 var client = redis.createClient();
 
@@ -28,11 +31,16 @@ app.post('/auth', function (req, res) {
     file: htpasswd_loc
   }).then((result) => {
     if (result) {
-      const my_key = crypto.randomBytes(16).toString("base64").replace(/[=/+]/g,"");
-      /* 6048000 seconds = 10 weeks */
-      client.set(my_key, 'potato', 'EX', 6048000);
-      res.cookie('ra_cookie', my_key, {secure: true, domain: domain});
-      res.end('{"ok":true}');
+      client.getAsync(`${req.body.user}-2fa`).then(secret => {
+        if(secret) {
+          if(req.body.totp != otplib.authenticator.generate(secret)) return res.end('{"ok":false}');
+        }
+        const my_key = crypto.randomBytes(16).toString("base64").replace(/[=/+]/g,"");
+        /* 6048000 seconds = 10 weeks */
+        client.set(my_key, req.body.user, 'EX', 6048000);
+        res.cookie('ra_cookie', my_key, {secure: true, domain: domain});
+        res.end('{"ok":true}');
+      });
     } else {
       res.end('{"ok":false}');
     }
@@ -46,14 +54,20 @@ app.get('/logout', function (req, res) {
       if (err) res.end('{"ok":false}');
       if (reply != 1) res.end('{"ok":false}');
       client.del(my_key);
-      res.clearCookie('ra_cookie');
-      res.end('{"ok":true}');
+      res.cookie('ra_cookie', '', {expires: new Date(), secure: true, domain: domain});
+      //res.send('{"ok":true}');
+      res.redirect("/");
     });
   } else {
     res.end('{"ok":false}');
   }
 });
-
+app.get("/2fa", (req, res) => {
+  client.existsAsync(`${req.body.user}-2fa`).then(reply => {
+    if(reply != 1) res.end("false");
+      else res.end("true");
+  });
+});
 /* send static assets */
 app.use('/', express.static('static'));
 
