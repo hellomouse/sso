@@ -4,10 +4,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const redis = require("redis");
 const crypto = require("crypto");
-<<<<<<< HEAD
 
-=======
->>>>>>> b34dfca8f3f6a0d886ee6aa2ee786126d3a64bde
 var client = redis.createClient();
 
 client.on('error', function (err) {
