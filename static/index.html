@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    	<meta charset="utf-8">
+        <meta name="description" content="Hellomouse Login">
+        <meta name="author" content="Hellomouse">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <title>Sign in please &middot; Hellomouse</title>
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+		<script src="https://hellomouse.net/login/anime.min.js" async></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet" media="screen"> -->
+		<style>
+			/* latin */
+			@font-face {
+			  font-family: 'Arvo';
+			  font-style: normal;
+			  font-weight: 400;
+			  src: local('Arvo'), url(https://fonts.gstatic.com/s/arvo/v10/tDbD2oWUg0MKqScQ7Z7o_vo.woff2) format('woff2');
+			  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+			}
+		</style>
 		<style>
             body {
                 text-align: center;
@@ -87,7 +103,7 @@
 		<div id="bg"></div>
 	</div>
 
-	<div id="logo">
+	<div id="logo" style="visibility: hidden">
 		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			 width="800px" height="250px" viewBox="0 0 800 250" enable-background="new 0 0 800 300" xml:space="preserve">
 		<defs>
@@ -225,24 +241,24 @@
         <button id="submit" class="button-color">I'm not a cat!</button>
 		<p id="msg"></p>
 
-		<script src="https://hellomouse.net/login/md5min.js"></script>
-		<script>
+		<script src="https://hellomouse.net/login/md5min.js" async></script>
+		<script async>
 
 		// Set a default background
 		document.getElementById('bg').style.backgroundImage = "url('/login/bg.jpg')";
 
 		// Custom backgrounds per user
-        let backgrounds = [['default', 0], ['izuna', 7]] // [[category, numberofimages]]
+        let backgrounds = [['default', 4], ['izuna', 7], ['tbp', 1]] // [[category, numberofimages]]
         let background = backgrounds[0] // Default please
 
 		// Usernames hashed via md5
 		let userPreferences = {
-			'63749376e9c181d86dad653534a5af2e': [1],
+			'63749376e9c181d86dad653534a5af2e': [1, 2],
 			'bf50bee76eade0b4919a0de3ab4376d9': [1]
 		}
 
 		// default please
-		let imageId = Math.floor(Math.random() * background[1]) + 1 + '.png';
+		let imageId = Math.floor(Math.random() * background[1]) + 1 + '.webp';
 		document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + background[0] + "/" + imageId + "')";
 
 		let localStorage = window.localStorage; // Alias
@@ -258,7 +274,7 @@
 				localStorage.setItem('backgroundUser', hash);
 
 				let category = userPreferences[hash][Math.floor(Math.random() * userPreferences[hash].length)];
-				let imageId = Math.floor(Math.random() * backgrounds[category][1]) + 1 + '.png';
+				let imageId = Math.floor(Math.random() * backgrounds[category][1]) + 1 + '.webp';
 				document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + backgrounds[category][0] + "/" + imageId + "')";
 				found = true;
 			}
@@ -267,30 +283,34 @@
 		}
 		checkPreference();
 
-		/* Animate all the SVG paths (logo)
-		 * to randomly fill in on a line curve */
-		let pathEls = document.querySelectorAll('path');
-		for (let i = 0; i < pathEls.length; i++) {
-			let pathEl = pathEls[i];
-			let offset = anime.setDashoffset(pathEl);
-			pathEl.setAttribute('stroke-dashoffset', offset);
-			anime({
-				targets: pathEl,
-				strokeDashoffset: [offset, 0],
-				duration: anime.random(500, 1200),
-				delay: anime.random(0, 500),
-				easing: 'easeInOutSine',
-				autoplay: true
-			});
-		}
+		window.onload = function(event) {
+			/* Animate all the SVG paths (logo)
+			 * to randomly fill in on a line curve */
+			let pathEls = document.querySelectorAll('path');
+			document.getElementById('logo').style = ""
+			for (let i = 0; i < pathEls.length; i++) {
+				let pathEl = pathEls[i];
+				let offset = anime.setDashoffset(pathEl);
+				pathEl.setAttribute('stroke-dashoffset', offset);
+				anime({
+					targets: pathEl,
+					strokeDashoffset: [offset, 0],
+					duration: anime.random(500, 1200),
+					delay: anime.random(0, 500),
+					easing: 'easeInOutSine',
+					autoplay: true
+				});
+			}
 
-		/* Pulsate button colors */
-		let buttonColors = anime.timeline({
-			endDelay: 1000,
-			easing: 'easeInOutQuad',
-			direction: 'alternate',
-			loop: true
-		}).add({ targets: '.button-color',  color: '#d5dbea', borderColor: '#d5dbea' }, 0);
+			/* Pulsate button colors */
+			let buttonColors = anime.timeline({
+				endDelay: 1000,
+				easing: 'easeInOutQuad',
+				direction: 'alternate',
+				loop: true
+			}).add({ targets: '.button-color',  color: '#d5dbea', borderColor: '#d5dbea' }, 0);
+
+		}
 
 		/* Randomize button text */
 		let loginLabels = [
