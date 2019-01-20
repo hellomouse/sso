@@ -17,11 +17,14 @@
   },
   "homepage": "https://github.com/hellomouse/sso#readme",
   "dependencies": {
+    "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
     "expressjs": "^1.0.1",
     "htpasswd-js": "^1.0.2",
+    "otplib": "^10.0.1",
+    "qrcode-terminal": "^0.12.0",
     "redis": "^2.8.0"
   }
 }
