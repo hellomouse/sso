@@ -18,6 +18,7 @@
   "homepage": "https://github.com/hellomouse/sso#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
     "expressjs": "^1.0.1",
     "htpasswd-js": "^1.0.2",

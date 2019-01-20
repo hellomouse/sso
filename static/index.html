@@ -16,8 +16,6 @@
 			#bg {
 				width: 100%;
 				height: 100%;
-/*				background-image: url(https://wallpaperscave.com/images/thumbs/wp-preview/800x500/18/02-22/anime-no-game-no-life-20499.jpg);
-				background-image: url('/login/bg.jpg');*/
 				background-size: cover;
 			}
 
@@ -222,32 +220,64 @@
 
         <input id="username" placeholder="Username" autofocus autocomplete="off" maxlength=40><br>
         <input id="password" type="password" placeholder="Password" autocomplete="off" onkeydown = "if (event.keyCode == 13) document.getElementById('submit').click()"><br>
-		<small class="opt-stuff" onclick="showPassword()">Show password</small> &middot; <small class="opt-stuff" onclick="localStorage.setItem('bowserinator-styles', '0')">I am a bad person</small>
+		<small class="opt-stuff" onclick="showPassword()" id="show_password">Show password</small> &nbsp;&nbsp;&nbsp; <small class="opt-stuff" onclick="localStorage.setItem('bowserinator-styles', '0')">I am a bad person</small>
 		<br><br>
         <button id="submit" class="button-color">I'm not a cat!</button>
 		<p id="msg"></p>
 
+		<script src="https://hellomouse.net/login/md5min.js"></script>
 		<script>
 
-if (localStorage && localStorage.getItem("bowserinator-styles") && localStorage.getItem("bowserinator-styles") === "0") {
-} else {
+		// Set a default background
 		document.getElementById('bg').style.backgroundImage = "url('/login/bg.jpg')";
-			/* Animate all the SVG paths (logo)
-			 * to randomly fill in on a line curve */
-			let pathEls = document.querySelectorAll('path');
-			for (let i = 0; i < pathEls.length; i++) {
-				let pathEl = pathEls[i];
-				let offset = anime.setDashoffset(pathEl);
-				pathEl.setAttribute('stroke-dashoffset', offset);
-				anime({
-					targets: pathEl,
-					strokeDashoffset: [offset, 0],
-					duration: anime.random(500, 1200),
-					delay: anime.random(0, 500),
-					easing: 'easeInOutSine',
-					autoplay: true
-				});
+
+		// Custom backgrounds per user
+        let backgrounds = [['default', 0], ['izuna', 7]] // [[category, numberofimages]]
+        let background = backgrounds[0] // Default please
+
+		let userPreferences = {
+			'63749376e9c181d86dad653534a5af2e': [1],
+			'bf50bee76eade0b4919a0de3ab4376d9': [1]
+		}
+
+		let localStorage = window.localStorage; // Alias
+		let found = false;
+
+		let checkPreference = function (event) {
+			if (found) return;
+
+			let value = document.getElementById('username').value
+			let hash = value.length ? md5(value) : localStorage.getItem('backgroundUser');
+
+			if (Object.keys(userPreferences).includes(hash)) {
+				localStorage.setItem('backgroundUser', hash);
+
+				let category = userPreferences[hash][Math.floor(Math.random() * userPreferences[hash].length)];
+				let imageId = Math.floor(Math.random() * backgrounds[category][1]) + 1 + '.png';
+				document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + backgrounds[category][0] + "/" + imageId + "')";
+				found = true;
 			}
+
+			let timeOut = setTimeout(checkPreference, 500); // Just in case first attempt fails for some reason
+		}
+		checkPreference();
+
+		/* Animate all the SVG paths (logo)
+		 * to randomly fill in on a line curve */
+		let pathEls = document.querySelectorAll('path');
+		for (let i = 0; i < pathEls.length; i++) {
+			let pathEl = pathEls[i];
+			let offset = anime.setDashoffset(pathEl);
+			pathEl.setAttribute('stroke-dashoffset', offset);
+			anime({
+				targets: pathEl,
+				strokeDashoffset: [offset, 0],
+				duration: anime.random(500, 1200),
+				delay: anime.random(0, 500),
+				easing: 'easeInOutSine',
+				autoplay: true
+			});
+		}
 
 		/* Pulsate button colors */
 		let buttonColors = anime.timeline({
@@ -256,7 +286,7 @@ if (localStorage && localStorage.getItem("bowserinator-styles") && localStorage.
 			direction: 'alternate',
 			loop: true
 		}).add({ targets: '.button-color',  color: '#d5dbea', borderColor: '#d5dbea' }, 0);
-}
+
 		/* Randomize button text */
 		let loginLabels = [
 			'Log me in, please!',
@@ -286,6 +316,13 @@ if (localStorage && localStorage.getItem("bowserinator-styles") && localStorage.
                 var data = {};
                 data['user'] = document.getElementById('username').value;
                 data['password'] =  document.getElementById('password').value;
+
+				// Background. If username in localstorage is not equal to value when submitted
+				// then clear persistent key
+                if (localStorage.getItem('backgroundUser') != md5(data['user'])) {
+                	localStorage.removeItem('backgroundUser')
+                }
+
 
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', '/login/auth', true);
