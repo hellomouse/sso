@@ -248,7 +248,6 @@
 		<label for="totp" style="font-size: 0">2FA Code
         <input id="totp" name="totp" placeholder="6 digits 2FA Token" autofocus autocomplete="off" type="number" maxlength=6 onkeydown = "if (event.keyCode == 13) document.getElementById('submit').click()">
         </label>
-
         <br>
 		<small class="opt-stuff" onclick="showPassword()" id="show_password">Show password</small>
 		<br><br>
@@ -268,11 +267,15 @@
 		// Usernames hashed via md5
 		let userPreferences = {
 			'63749376e9c181d86dad653534a5af2e': [1, 2],
-			'bf50bee76eade0b4919a0de3ab4376d9': [1, 2],
+			'bf50bee76eade0b4919a0de3ab4376d9': [1]
 		}
 		let totp = {
 			'5b895c7bcd4194af60281198880a0a8a': true,
 		};
+
+		// default please
+		let imageId = Math.floor(Math.random() * background[1]) + 1 + '.webp';
+		document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + background[0] + "/" + imageId + "')";
 
 		// default please
 		let imageId = Math.floor(Math.random() * background[1]) + 1 + '.webp';
