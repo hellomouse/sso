@@ -2,6 +2,7 @@ const htpasswd = require('htpasswd-js');
 const express = require('express');
 const bodyParser = require('body-parser');
 const redis = require("redis");
+const crypto = require("crypto");
 var client = redis.createClient();
 
 client.on('error', function (err) {
@@ -24,7 +25,7 @@ app.post('/auth', function (req, res) {
     file: htpasswd_loc
   }).then((result) => {
     if (result) {
-      const my_key = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      const my_key = crypto.randomBytes(16).toString("base64").replace(/[=/+]/g, "");
       /* 604800000 miliseconds = 1 week */
       client.set(my_key, 'potato', 'EX', 604800000);
       res.cookie('ra_cookie', my_key, {expires: new Date(Date.now() + 604800000), secure: true, domain: domain});
