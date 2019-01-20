@@ -1,62 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    	<meta charset="utf-8">
+        <meta charset="utf-8">
         <meta name="description" content="Hellomouse Login">
         <meta name="author" content="Hellomouse">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>Sign in please &middot; Hellomouse</title>
 
-		<script src="https://hellomouse.net/login/anime.min.js" async></script>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet" media="screen"> -->
-		<style>
-			/* latin */
-			@font-face {
-			  font-family: 'Arvo';
-			  font-style: normal;
-			  font-weight: 400;
-			  src: local('Arvo'), url(https://hellomouse.net/login/tDbD2oWUg0MKqScQ7Z7o_vo.woff2) format('woff2');
-			  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-			}
-		</style>
-		<style>
+        <script src="https://hellomouse.net/login/anime.min.js" async></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet" media="screen"> -->
+        <style>
+            /* latin */
+            @font-face {
+              font-family: 'Arvo';
+              font-style: normal;
+              font-weight: 400;
+              src: local('Arvo'), url(https://hellomouse.net/login/tDbD2oWUg0MKqScQ7Z7o_vo.woff2) format('woff2');
+              unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+            }
+        </style>
+        <style>
             body {
                 text-align: center;
-				background-color: #0A0A0A;
-				color: #e5e5ff;
-				font-family: 'Arvo', serif;
+                background-color: #0A0A0A;
+                color: #e5e5ff;
+                font-family: 'Arvo', serif;
             }
 
-			#bg {
-				width: 100%;
-				height: 100%;
-				background-size: cover;
-			}
+            #bg {
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+            }
 
-			.bg-container {
-				width: 100%;
-				height: 100%;
-				position: fixed;
-				left: 0;
-				top: 0;
-				z-index: -100;
-				filter: brightness(20%) blur(3px);
-			}
+            .bg-container {
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                left: 0;
+                top: 0;
+                z-index: -100;
+                filter: brightness(20%) blur(3px);
+            }
 
-			input, button {
-				padding: 10px 20px;
-				width: 300px;
-				font-family: 'Arvo', serif;
-				max-width: 100%;
-				border: 1px solid black;
-				outline: none;
-			}
+            input, button {
+                padding: 10px 20px;
+                width: 300px;
+                font-family: 'Arvo', serif;
+                max-width: 100%;
+                border: 1px solid black;
+                outline: none;
+            }
 
-			svg {
-				max-width: 100%;
-			}
+            svg {
+                max-width: 100%;
+            }
 
             input:-webkit-autofill,
             input:-webkit-autofill:hover,
@@ -65,116 +65,116 @@
                 -webkit-box-shadow: 0 0 0 30px white inset !important;
             }
 
-			button {
-				width: 340px;
-				outline: none;
-				background-color: rgba(255, 255, 255, 0.05);
-				color: #e7d5ea;
-				border: 2px double #e7d5ea;
-				filter: brightness(100%);
-				transition: filter 0.2s;
-			}
+            button {
+                width: 340px;
+                outline: none;
+                background-color: rgba(255, 255, 255, 0.05);
+                color: #e7d5ea;
+                border: 2px double #e7d5ea;
+                filter: brightness(100%);
+                transition: filter 0.2s;
+            }
 
-			button:hover {
-				cursor: pointer;
-				filter: brightness(120%);
-				transition: filter 0.2s;
-			}
+            button:hover {
+                cursor: pointer;
+                filter: brightness(120%);
+                transition: filter 0.2s;
+            }
 
-			#msg {
-				color: #ef5b5b;
-			}
+            #msg {
+                color: #ef5b5b;
+            }
 
-			.opt-stuff {
-				text-decoration: underline;
-				position: relative;
-				top: 5px;
-				user-select: none;
-			}
+            .opt-stuff {
+                text-decoration: underline;
+                position: relative;
+                top: 5px;
+                user-select: none;
+            }
 
-			.opt-stuff:hover {
-				cursor: pointer;
-			}
+            .opt-stuff:hover {
+                cursor: pointer;
+            }
         </style>
     </head>
     <body>
 
-	<div class="bg-container">
-		<div id="bg"></div>
-	</div>
+    <div class="bg-container">
+        <div id="bg"></div>
+    </div>
 
-	<div id="logo" style="visibility: hidden">
-		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-			 width="800px" height="250px" viewBox="0 0 800 250" enable-background="new 0 0 800 300" xml:space="preserve">
-		<defs>
-		<linearGradient id="linear" x1="0%" y1="0%" x2="0%" y2="100%">
-			<stop offset="0%"   stop-color="#e0ebff"/>
-			<stop offset="100%" stop-color="#e0ffed"/>
-		</linearGradient>
-		</defs>
+    <div id="logo" style="visibility: hidden">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             width="800px" height="250px" viewBox="0 0 800 250" enable-background="new 0 0 800 300" xml:space="preserve">
+        <defs>
+        <linearGradient id="linear" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#e0ebff"/>
+            <stop offset="100%" stop-color="#e0ffed"/>
+        </linearGradient>
+        </defs>
 
-		<g>
-			<path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M102.602,121.556h10.7v73.2h-10.7v-13.101v-9.6
-				h-28.5v9.6v13.101h-10.7v-73.2h10.7v12.7v18.8v9.399v0.2h28.5v-0.2v-9.399v-18.8V121.556z"/>
-			<path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M139.701,184.155h32.6v10.5h-43.2v-73h42.5v10.3
-				h-31.9v11.553v5.977v7.271h28.7v10h-28.7V184.155z"/>
-			<path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M198.801,184.455h29.9v10.5h-40.6v-73.399h10.7
-				V184.455z"/>
-			<path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M255.2,184.455h29.9v10.5h-40.6v-73.399h10.7
-				V184.455z"/>
-			<path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M337.399,121.255c5.066,0,9.833,0.967,14.3,2.9
-				c4.465,1.935,8.35,4.567,11.65,7.9c3.3,3.334,5.9,7.25,7.8,11.75s2.85,9.317,2.85,14.45c0,5.066-0.95,9.834-2.85,14.3
-				c-1.9,4.467-4.5,8.367-7.8,11.7c-3.3,3.334-7.185,5.967-11.65,7.899c-4.467,1.935-9.234,2.9-14.3,2.9
-				c-5.067,0-9.817-0.966-14.25-2.9c-4.434-1.933-8.3-4.565-11.6-7.899c-3.3-3.333-5.9-7.233-7.8-11.7
-				c-1.9-4.466-2.85-9.233-2.85-14.3c0-5.133,0.95-9.95,2.85-14.45s4.5-8.416,7.8-11.75c3.3-3.333,7.166-5.966,11.6-7.9
-				C327.583,122.223,332.333,121.255,337.399,121.255z M337.399,184.756c3.466,0,6.75-0.697,9.85-2.093c3.1-1.394,5.8-3.287,8.1-5.678
-				c2.3-2.391,4.116-5.197,5.45-8.419c1.333-3.221,2-6.658,2-10.311c0-3.653-0.667-7.106-2-10.361c-1.334-3.255-3.15-6.094-5.45-8.519
-				c-2.3-2.424-5-4.333-8.1-5.729c-3.1-1.394-6.384-2.092-9.85-2.092c-3.467,0-6.734,0.698-9.8,2.092
-				c-3.067,1.396-5.75,3.305-8.05,5.729c-2.3,2.425-4.117,5.264-5.45,8.519c-1.334,3.255-2,6.708-2,10.361
-				c0,3.652,0.666,7.09,2,10.311c1.333,3.222,3.15,6.028,5.45,8.419c2.3,2.391,4.983,4.284,8.05,5.678
-				C330.665,184.059,333.932,184.756,337.399,184.756z"/>
-			<path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M451.499,121.556l13.6,73.399h-10.899
-				l-7.101-40.699l-19.7,42l-19.6-42l-7.1,40.699h-10.9l13.6-73.399l24,50.5L451.499,121.556z"/>
-			<path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M517.398,121.255c5.065,0,9.832,0.967,14.3,2.9
-				c4.466,1.935,8.35,4.567,11.649,7.9c3.301,3.334,5.9,7.25,7.801,11.75c1.899,4.5,2.85,9.317,2.85,14.45
-				c0,5.066-0.95,9.834-2.85,14.3c-1.9,4.467-4.5,8.367-7.801,11.7c-3.3,3.334-7.184,5.967-11.649,7.899
-				c-4.468,1.935-9.234,2.9-14.3,2.9c-5.067,0-9.817-0.966-14.25-2.9c-4.435-1.933-8.301-4.565-11.601-7.899
-				c-3.3-3.333-5.899-7.233-7.8-11.7c-1.9-4.466-2.85-9.233-2.85-14.3c0-5.133,0.949-9.95,2.85-14.45s4.5-8.416,7.8-11.75
-				c3.3-3.333,7.166-5.966,11.601-7.9C507.581,122.223,512.331,121.255,517.398,121.255z M517.398,184.756
-				c3.465,0,6.75-0.697,9.85-2.093c3.1-1.394,5.8-3.287,8.1-5.678c2.301-2.391,4.116-5.197,5.45-8.419c1.333-3.221,2-6.658,2-10.311
-				c0-3.653-0.667-7.106-2-10.361c-1.334-3.255-3.149-6.094-5.45-8.519c-2.3-2.424-5-4.333-8.1-5.729
-				c-3.1-1.394-6.385-2.092-9.85-2.092c-3.468,0-6.734,0.698-9.801,2.092c-3.066,1.396-5.75,3.305-8.05,5.729
-				c-2.3,2.425-4.117,5.264-5.45,8.519c-1.334,3.255-2,6.708-2,10.361c0,3.652,0.666,7.09,2,10.311c1.333,3.222,3.15,6.028,5.45,8.419
-				s4.983,4.284,8.05,5.678C510.664,184.059,513.931,184.756,517.398,184.756z"/>
-			<path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M608.697,121.556h10.5v49
-				c0,3.399-0.649,6.567-1.95,9.5c-1.3,2.935-3.084,5.484-5.35,7.649c-2.268,2.168-4.9,3.885-7.9,5.15c-3,1.268-6.234,1.9-9.699,1.9
-				c-3.4,0-6.585-0.633-9.551-1.9c-2.967-1.266-5.566-2.982-7.8-5.15c-2.234-2.165-3.984-4.715-5.25-7.649
-				c-1.267-2.933-1.899-6.101-1.899-9.5v-49h10.5v49c0,1.935,0.365,3.75,1.1,5.45c0.732,1.699,1.732,3.199,3,4.5
-				c1.266,1.3,2.766,2.316,4.5,3.05c1.732,0.734,3.565,1.1,5.5,1.1c2,0,3.865-0.365,5.6-1.1c1.733-0.733,3.25-1.75,4.551-3.05
-				c1.3-1.301,2.315-2.801,3.05-4.5c0.732-1.7,1.1-3.516,1.1-5.45V121.556z"/>
-			<path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M675.196,158.355c0.466,0.334,0.9,0.717,1.301,1.15
-				c0.399,0.434,0.766,0.85,1.1,1.25c1.533,1.934,2.732,4.05,3.6,6.35c0.866,2.3,1.301,4.717,1.301,7.25c0,0.6-0.035,1.067-0.101,1.4
-				c-0.2,3.734-1.334,7.1-3.399,10.1c-1.867,2.8-4.268,5.018-7.2,6.65c-2.935,1.634-6.2,2.449-9.8,2.449h-6.601
-				c-3.6,0-6.867-0.815-9.8-2.449c-2.935-1.633-5.334-3.851-7.2-6.65c-0.534-0.8-1.067-1.732-1.6-2.8l9.3-7.2
-				c0.2,1.268,0.615,2.45,1.25,3.55c0.633,1.101,1.416,2.067,2.35,2.9c0.934,0.834,2,1.484,3.2,1.95c1.2,0.467,2.466,0.699,3.8,0.699
-				h4c2.733,0,5.101-0.883,7.101-2.649c2-1.766,3.2-3.95,3.6-6.55c0-0.266,0.016-0.533,0.05-0.801c0.033-0.266,0.051-0.532,0.051-0.8
-				c0-1.466-0.268-2.833-0.801-4.1c-0.534-1.266-1.267-2.383-2.199-3.351c-0.935-0.965-2.035-1.75-3.301-2.35
-				c-1.267-0.6-2.6-0.933-4-1h-5.699h-0.4c-2.467-0.065-4.784-0.55-6.95-1.45c-2.167-0.899-4.117-2.115-5.85-3.649
-				c-0.935-0.666-1.734-1.466-2.4-2.4c-1.534-1.933-2.734-4.05-3.6-6.35c-0.867-2.3-1.3-4.715-1.3-7.25v-1.4
-				c0.332-3.8,1.5-7.166,3.5-10.1c1.865-2.8,4.266-5.016,7.199-6.65c2.934-1.633,6.2-2.45,9.801-2.45h6.5c3.6,0,6.883,0.817,9.85,2.45
-				c2.966,1.634,5.383,3.85,7.25,6.65c0.2,0.334,0.416,0.7,0.65,1.1c0.232,0.4,0.449,0.767,0.649,1.1l-9.1,7.1
-				c-0.601-2.4-1.867-4.4-3.8-6c-1.935-1.6-4.168-2.4-6.7-2.4h-4c-1.335,0-2.617,0.234-3.851,0.7c-1.234,0.467-2.316,1.117-3.25,1.95
-				c-0.934,0.834-1.717,1.817-2.35,2.95c-0.635,1.134-1.05,2.334-1.25,3.6c-0.067,0.267-0.1,0.534-0.1,0.8c0,0.268,0,0.535,0,0.8
-				c0,1.467,0.266,2.834,0.8,4.1c0.532,1.267,1.266,2.384,2.2,3.35c0.933,0.967,2.032,1.75,3.3,2.351c1.266,0.6,2.6,0.934,4,1h5.7
-				h0.399c2.466,0.066,4.783,0.55,6.95,1.449C671.513,155.605,673.462,156.822,675.196,158.355z"/>
-			<path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M708.896,184.155h32.6v10.5h-43.199v-73h42.5v10.3
-				h-31.9v11.553v5.977v7.271h28.7v10h-28.7V184.155z"/>
-		</g>
-		</svg>
+        <g>
+            <path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M102.602,121.556h10.7v73.2h-10.7v-13.101v-9.6
+                h-28.5v9.6v13.101h-10.7v-73.2h10.7v12.7v18.8v9.399v0.2h28.5v-0.2v-9.399v-18.8V121.556z"/>
+            <path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M139.701,184.155h32.6v10.5h-43.2v-73h42.5v10.3
+                h-31.9v11.553v5.977v7.271h28.7v10h-28.7V184.155z"/>
+            <path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M198.801,184.455h29.9v10.5h-40.6v-73.399h10.7
+                V184.455z"/>
+            <path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M255.2,184.455h29.9v10.5h-40.6v-73.399h10.7
+                V184.455z"/>
+            <path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M337.399,121.255c5.066,0,9.833,0.967,14.3,2.9
+                c4.465,1.935,8.35,4.567,11.65,7.9c3.3,3.334,5.9,7.25,7.8,11.75s2.85,9.317,2.85,14.45c0,5.066-0.95,9.834-2.85,14.3
+                c-1.9,4.467-4.5,8.367-7.8,11.7c-3.3,3.334-7.185,5.967-11.65,7.899c-4.467,1.935-9.234,2.9-14.3,2.9
+                c-5.067,0-9.817-0.966-14.25-2.9c-4.434-1.933-8.3-4.565-11.6-7.899c-3.3-3.333-5.9-7.233-7.8-11.7
+                c-1.9-4.466-2.85-9.233-2.85-14.3c0-5.133,0.95-9.95,2.85-14.45s4.5-8.416,7.8-11.75c3.3-3.333,7.166-5.966,11.6-7.9
+                C327.583,122.223,332.333,121.255,337.399,121.255z M337.399,184.756c3.466,0,6.75-0.697,9.85-2.093c3.1-1.394,5.8-3.287,8.1-5.678
+                c2.3-2.391,4.116-5.197,5.45-8.419c1.333-3.221,2-6.658,2-10.311c0-3.653-0.667-7.106-2-10.361c-1.334-3.255-3.15-6.094-5.45-8.519
+                c-2.3-2.424-5-4.333-8.1-5.729c-3.1-1.394-6.384-2.092-9.85-2.092c-3.467,0-6.734,0.698-9.8,2.092
+                c-3.067,1.396-5.75,3.305-8.05,5.729c-2.3,2.425-4.117,5.264-5.45,8.519c-1.334,3.255-2,6.708-2,10.361
+                c0,3.652,0.666,7.09,2,10.311c1.333,3.222,3.15,6.028,5.45,8.419c2.3,2.391,4.983,4.284,8.05,5.678
+                C330.665,184.059,333.932,184.756,337.399,184.756z"/>
+            <path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M451.499,121.556l13.6,73.399h-10.899
+                l-7.101-40.699l-19.7,42l-19.6-42l-7.1,40.699h-10.9l13.6-73.399l24,50.5L451.499,121.556z"/>
+            <path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M517.398,121.255c5.065,0,9.832,0.967,14.3,2.9
+                c4.466,1.935,8.35,4.567,11.649,7.9c3.301,3.334,5.9,7.25,7.801,11.75c1.899,4.5,2.85,9.317,2.85,14.45
+                c0,5.066-0.95,9.834-2.85,14.3c-1.9,4.467-4.5,8.367-7.801,11.7c-3.3,3.334-7.184,5.967-11.649,7.899
+                c-4.468,1.935-9.234,2.9-14.3,2.9c-5.067,0-9.817-0.966-14.25-2.9c-4.435-1.933-8.301-4.565-11.601-7.899
+                c-3.3-3.333-5.899-7.233-7.8-11.7c-1.9-4.466-2.85-9.233-2.85-14.3c0-5.133,0.949-9.95,2.85-14.45s4.5-8.416,7.8-11.75
+                c3.3-3.333,7.166-5.966,11.601-7.9C507.581,122.223,512.331,121.255,517.398,121.255z M517.398,184.756
+                c3.465,0,6.75-0.697,9.85-2.093c3.1-1.394,5.8-3.287,8.1-5.678c2.301-2.391,4.116-5.197,5.45-8.419c1.333-3.221,2-6.658,2-10.311
+                c0-3.653-0.667-7.106-2-10.361c-1.334-3.255-3.149-6.094-5.45-8.519c-2.3-2.424-5-4.333-8.1-5.729
+                c-3.1-1.394-6.385-2.092-9.85-2.092c-3.468,0-6.734,0.698-9.801,2.092c-3.066,1.396-5.75,3.305-8.05,5.729
+                c-2.3,2.425-4.117,5.264-5.45,8.519c-1.334,3.255-2,6.708-2,10.361c0,3.652,0.666,7.09,2,10.311c1.333,3.222,3.15,6.028,5.45,8.419
+                s4.983,4.284,8.05,5.678C510.664,184.059,513.931,184.756,517.398,184.756z"/>
+            <path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M608.697,121.556h10.5v49
+                c0,3.399-0.649,6.567-1.95,9.5c-1.3,2.935-3.084,5.484-5.35,7.649c-2.268,2.168-4.9,3.885-7.9,5.15c-3,1.268-6.234,1.9-9.699,1.9
+                c-3.4,0-6.585-0.633-9.551-1.9c-2.967-1.266-5.566-2.982-7.8-5.15c-2.234-2.165-3.984-4.715-5.25-7.649
+                c-1.267-2.933-1.899-6.101-1.899-9.5v-49h10.5v49c0,1.935,0.365,3.75,1.1,5.45c0.732,1.699,1.732,3.199,3,4.5
+                c1.266,1.3,2.766,2.316,4.5,3.05c1.732,0.734,3.565,1.1,5.5,1.1c2,0,3.865-0.365,5.6-1.1c1.733-0.733,3.25-1.75,4.551-3.05
+                c1.3-1.301,2.315-2.801,3.05-4.5c0.732-1.7,1.1-3.516,1.1-5.45V121.556z"/>
+            <path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M675.196,158.355c0.466,0.334,0.9,0.717,1.301,1.15
+                c0.399,0.434,0.766,0.85,1.1,1.25c1.533,1.934,2.732,4.05,3.6,6.35c0.866,2.3,1.301,4.717,1.301,7.25c0,0.6-0.035,1.067-0.101,1.4
+                c-0.2,3.734-1.334,7.1-3.399,10.1c-1.867,2.8-4.268,5.018-7.2,6.65c-2.935,1.634-6.2,2.449-9.8,2.449h-6.601
+                c-3.6,0-6.867-0.815-9.8-2.449c-2.935-1.633-5.334-3.851-7.2-6.65c-0.534-0.8-1.067-1.732-1.6-2.8l9.3-7.2
+                c0.2,1.268,0.615,2.45,1.25,3.55c0.633,1.101,1.416,2.067,2.35,2.9c0.934,0.834,2,1.484,3.2,1.95c1.2,0.467,2.466,0.699,3.8,0.699
+                h4c2.733,0,5.101-0.883,7.101-2.649c2-1.766,3.2-3.95,3.6-6.55c0-0.266,0.016-0.533,0.05-0.801c0.033-0.266,0.051-0.532,0.051-0.8
+                c0-1.466-0.268-2.833-0.801-4.1c-0.534-1.266-1.267-2.383-2.199-3.351c-0.935-0.965-2.035-1.75-3.301-2.35
+                c-1.267-0.6-2.6-0.933-4-1h-5.699h-0.4c-2.467-0.065-4.784-0.55-6.95-1.45c-2.167-0.899-4.117-2.115-5.85-3.649
+                c-0.935-0.666-1.734-1.466-2.4-2.4c-1.534-1.933-2.734-4.05-3.6-6.35c-0.867-2.3-1.3-4.715-1.3-7.25v-1.4
+                c0.332-3.8,1.5-7.166,3.5-10.1c1.865-2.8,4.266-5.016,7.199-6.65c2.934-1.633,6.2-2.45,9.801-2.45h6.5c3.6,0,6.883,0.817,9.85,2.45
+                c2.966,1.634,5.383,3.85,7.25,6.65c0.2,0.334,0.416,0.7,0.65,1.1c0.232,0.4,0.449,0.767,0.649,1.1l-9.1,7.1
+                c-0.601-2.4-1.867-4.4-3.8-6c-1.935-1.6-4.168-2.4-6.7-2.4h-4c-1.335,0-2.617,0.234-3.851,0.7c-1.234,0.467-2.316,1.117-3.25,1.95
+                c-0.934,0.834-1.717,1.817-2.35,2.95c-0.635,1.134-1.05,2.334-1.25,3.6c-0.067,0.267-0.1,0.534-0.1,0.8c0,0.268,0,0.535,0,0.8
+                c0,1.467,0.266,2.834,0.8,4.1c0.532,1.267,1.266,2.384,2.2,3.35c0.933,0.967,2.032,1.75,3.3,2.351c1.266,0.6,2.6,0.934,4,1h5.7
+                h0.399c2.466,0.066,4.783,0.55,6.95,1.449C671.513,155.605,673.462,156.822,675.196,158.355z"/>
+            <path fill="none" stroke="url(#linear)" stroke-width="7" stroke-miterlimit="10" d="M708.896,184.155h32.6v10.5h-43.199v-73h42.5v10.3
+                h-31.9v11.553v5.977v7.271h28.7v10h-28.7V184.155z"/>
+        </g>
+        </svg>
 
-		<noscript>
-		    <p style="color: red">
-		        Enable javascript to login!
+        <noscript>
+            <p style="color: red">
+                Enable javascript to login!
                 <pre>
        00000000                                                 00   00      00
         0     00                                              00     00      00
@@ -223,19 +223,19 @@
 
 - Hellomouse Team
                 </pre>
-		    </p>
-		</noscript>
+            </p>
+        </noscript>
 
-		<p>
-		Hi mice! Please sign in before accessing the page.<br>
-		(Use the login specified in the server config)
-		</p>
+        <p>
+        Hi mice! Please sign in before accessing the page.<br>
+        (Use the login specified in the server config)
+        </p>
 
-		<br>
-		</div>
+        <br>
+        </div>
 
-		<br>
-		<label for="username" style="font-size: 0">Username
+        <br>
+        <label for="username" style="font-size: 0">Username
         <input id="username" name="username" placeholder="Username" autofocus autocomplete="off" maxlength=40>
         </label>
 
@@ -244,150 +244,150 @@
         <input id="password" name="password" type="password" placeholder="Password" autocomplete="off" onkeydown = "if (event.keyCode == 13) document.getElementById('submit').click()">
         </label>
 
-		<br>
-		<label for="totp" style="font-size: 0">2FA Code
+        <br>
+        <label for="totp" style="font-size: 0">2FA Code
         <input id="totp" name="totp" placeholder="6 digits 2FA Token" autofocus autocomplete="off" type="number" maxlength=6 onkeydown = "if (event.keyCode == 13) document.getElementById('submit').click()">
         </label>
         <br>
-		<small class="opt-stuff" onclick="showPassword()" id="show_password">Show password</small>
-		<br><br>
+        <small class="opt-stuff" onclick="showPassword()" id="show_password">Show password</small>
+        <br><br>
         <button id="submit" class="button-color">I'm not a cat!</button>
-		<p id="msg"></p>
+        <p id="msg"></p>
 
-		<script src="https://hellomouse.net/login/md5min.js" async></script>
-		<script async>
+        <script src="https://hellomouse.net/login/md5min.js" async></script>
+        <script async>
+        /* global anime, md5 */
+        // Custom backgrounds per user
+        let backgrounds = [['default', 4], ['izuna', 7], ['tbp', 1]]; // [[category, numberofimages]]
+        let background = backgrounds[0]; // Default please
 
-		// Set a default background
-		document.getElementById('bg').style.backgroundImage = "url('/login/bg.jpg')";
+        // Usernames hashed via md5
+        let userPreferences = {
+            '63749376e9c181d86dad653534a5af2e': [1, 2],
+            'bf50bee76eade0b4919a0de3ab4376d9': [1, 2]
+        };
+        let totp = {
+            '5b895c7bcd4194af60281198880a0a8a': true,
+        };
 
-		// Custom backgrounds per user
-        let backgrounds = [['default', 4], ['izuna', 7], ['tbp', 1]] // [[category, numberofimages]]
-        let background = backgrounds[0] // Default please
+        // default please
+        let imageId = Math.floor(Math.random() * background[1]) + 1 + '.webp';
+        document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + background[0] + "/" + imageId + "')";
 
-		// Usernames hashed via md5
-		let userPreferences = {
-			'63749376e9c181d86dad653534a5af2e': [1, 2],
-			'bf50bee76eade0b4919a0de3ab4376d9': [1]
-		}
-		let totp = {
-			'5b895c7bcd4194af60281198880a0a8a': true,
-		};
+        let localStorage = window.localStorage; // Alias
+        let found = false;
 
-		// default please
-		let imageId = Math.floor(Math.random() * background[1]) + 1 + '.webp';
-		document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + background[0] + "/" + imageId + "')";
+        let checkPreference = function (event) {
+            if (found) return;
 
-		let localStorage = window.localStorage; // Alias
-		let found = false;
+            let value = document.getElementById('username').value;
+            let hash = value.length ? md5(value) : localStorage.getItem('backgroundUser');
 
-		let checkPreference = function (event) {
-			if (found) return;
+            if (Object.keys(userPreferences).includes(hash)) {
+                localStorage.setItem('backgroundUser', hash);
 
-			let value = document.getElementById('username').value
-			let hash = value.length ? md5(value) : localStorage.getItem('backgroundUser');
+                let category = userPreferences[hash][Math.floor(Math.random() * userPreferences[hash].length)];
+                let imageId = Math.floor(Math.random() * backgrounds[category][1]) + 1 + '.webp';
+                document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + backgrounds[category][0] + "/" + imageId + "')";
+                found = true;
+            }
+            document.getElementById('totp').style.visibility = totp[hash] ? "visible" : "hidden";
+            setTimeout(checkPreference, 500); // Just in case first attempt fails for some reason
+        };
+        checkPreference();
 
-			if (Object.keys(userPreferences).includes(hash)) {
-				localStorage.setItem('backgroundUser', hash);
+        window.onload = function(event) {
+            /* Animate all the SVG paths (logo)
+             * to randomly fill in on a line curve */
+            let pathEls = document.querySelectorAll('path');
+            document.getElementById('logo').style = "";
+            for (let i = 0; i < pathEls.length; i++) {
+                let pathEl = pathEls[i];
+                let offset = anime.setDashoffset(pathEl);
+                pathEl.setAttribute('stroke-dashoffset', offset);
+                anime({
+                    targets: pathEl,
+                    strokeDashoffset: [offset, 0],
+                    duration: anime.random(500, 1200),
+                    delay: anime.random(0, 500),
+                    easing: 'easeInOutSine',
+                    autoplay: true
+                });
+            }
 
-				let category = userPreferences[hash][Math.floor(Math.random() * userPreferences[hash].length)];
-				let imageId = Math.floor(Math.random() * backgrounds[category][1]) + 1 + '.webp';
-				document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + backgrounds[category][0] + "/" + imageId + "')";
-				found = true;
-			}
-			document.getElementById('totp').style.visibility = totp[hash] ? "visible" : "hidden";
-			let timeOut = setTimeout(checkPreference, 500); // Just in case first attempt fails for some reason
-		}
-		checkPreference();
+            /* Pulsate button colors */
+            anime.timeline({
+                endDelay: 1000,
+                easing: 'easeInOutQuad',
+                direction: 'alternate',
+                loop: true
+            }).add({ targets: '.button-color',  color: '#d5dbea', borderColor: '#d5dbea' }, 0);
 
-		window.onload = function(event) {
-			/* Animate all the SVG paths (logo)
-			 * to randomly fill in on a line curve */
-			let pathEls = document.querySelectorAll('path');
-			document.getElementById('logo').style = ""
-			for (let i = 0; i < pathEls.length; i++) {
-				let pathEl = pathEls[i];
-				let offset = anime.setDashoffset(pathEl);
-				pathEl.setAttribute('stroke-dashoffset', offset);
-				anime({
-					targets: pathEl,
-					strokeDashoffset: [offset, 0],
-					duration: anime.random(500, 1200),
-					delay: anime.random(0, 500),
-					easing: 'easeInOutSine',
-					autoplay: true
-				});
-			}
+            // logged in already?
+            let ra_cookie = document.cookie.split(";").filter(x => x.includes("ra_cookie"));
+            if (ra_cookie) ra_cookie = ra_cookie[0].split("=")[1];
+            if (ra_cookie) {
+                document.getElementById('msg').innerHTML = 'By the way, you are already logged in. Did you mean to <a href="/login/logout">log out</a> instead?';
+            }
+        };
 
-			/* Pulsate button colors */
-			let buttonColors = anime.timeline({
-				endDelay: 1000,
-				easing: 'easeInOutQuad',
-				direction: 'alternate',
-				loop: true
-			}).add({ targets: '.button-color',  color: '#d5dbea', borderColor: '#d5dbea' }, 0);
+        /* Randomize button text */
+        let loginLabels = [
+            'Log me in, please!',
+            'Promise I\'m not a cat!',
+            'Aschente!',
+            'Open sesame!'
+        ];
+        document.getElementById('submit').innerHTML = loginLabels[Math.floor(Math.random() * loginLabels.length)];
 
-		}
+        /* Show password / hide password methods */
+        function showPassword() {
+            document.getElementById('password').type = 'text';
+            document.getElementById('show_password').innerHTML = 'Hide password';
+            document.getElementById('show_password').onclick = hidePassword;
+        }
 
-		/* Randomize button text */
-		let loginLabels = [
-			'Log me in, please!',
-			'Promise I\'m not a cat!',
-			'Aschente!',
-			'Open sesame!'
-		];
-		document.getElementById('submit').innerHTML = loginLabels[Math.floor(Math.random() * loginLabels.length)];
+        function hidePassword() {
+            document.getElementById('password').type = 'password';
+            document.getElementById('show_password').innerHTML = 'Show password';
+            document.getElementById('show_password').onclick = showPassword;
+        }
 
-		/* Show password / hide password methods */
-		function showPassword() {
-			document.getElementById('password').type = 'text';
-			document.getElementById('show_password').innerHTML = 'Hide password';
-			document.getElementById('show_password').onclick = hidePassword;
-		}
+        var referrer = document.referrer;
+        document.getElementById('submit').addEventListener('click', function (e) {
+            var data = {};
+            data['user'] = document.getElementById('username').value;
+            data['password'] =  document.getElementById('password').value;
+            data['totp'] =  document.getElementById('totp').value;
 
-		function hidePassword() {
-			document.getElementById('password').type = 'password';
-			document.getElementById('show_password').innerHTML = 'Show password';
-			document.getElementById('show_password').onclick = showPassword;
-		}
-		</script>
+            // Background. If username in localstorage is not equal to value when submitted
+            // then clear persistent key
+            if (localStorage.getItem('backgroundUser') != md5(data['user'])) {
+                localStorage.removeItem('backgroundUser');
+            }
 
-        <script>
-            var referrer = document.referrer;
-            document.getElementById('submit').addEventListener('click', function (e) {
-                var data = {};
-                data['user'] = document.getElementById('username').value;
-                data['password'] =  document.getElementById('password').value;
-				data['totp'] =  document.getElementById('totp').value;
-
-				// Background. If username in localstorage is not equal to value when submitted
-				// then clear persistent key
-                if (localStorage.getItem('backgroundUser') != md5(data['user'])) {
-                	localStorage.removeItem('backgroundUser')
-                }
-
-
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', '/login/auth', true);
-                xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-                xhr.onload = function () {
-                    try {
-                        var res = JSON.parse(this.responseText);
-                        if (res.ok) {
-							document.getElementById('msg').style.color = 'green';
-                            document.getElementById('msg').innerHTML = 'Signed in! Sending you back to the old page...';
-                            setTimeout(function() {
-                                if (!referrer) { window.location = window.origin }
-                                else { window.location = referrer };
-                            }, 500);
-                        } else {
-                            document.getElementById('msg').innerHTML = 'Oops, please double-check your passwords.';
-                        }
-                    } catch (e) {
-                        document.getElementById('msg').innerHTML = 'Oops, backend server is down.';
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/login/auth', true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            xhr.onload = function () {
+                try {
+                    var res = JSON.parse(this.responseText);
+                    if (res.ok) {
+                        document.getElementById('msg').style.color = 'green';
+                        document.getElementById('msg').innerHTML = 'Signed in! Sending you back to the old page...';
+                        setTimeout(function() {
+                            if (!referrer) { window.location = window.origin; }
+                            else { window.location = referrer; }
+                        }, 500);
+                    } else {
+                        document.getElementById('msg').innerHTML = 'Oops, please double-check your passwords.';
                     }
-                };
-                xhr.send(JSON.stringify(data));
-            });
-        </script>
+                } catch (e) {
+                    document.getElementById('msg').innerHTML = 'Oops, backend server is down.';
+                }
+            };
+            xhr.send(JSON.stringify(data));
+        });
+    </script>
     </body>
 </html>
