@@ -231,11 +231,20 @@
 		(Use the login specified in the server config)
 		</p>
 
-		<br><br>
+		<br>
 		</div>
 
-        <input id="username" placeholder="Username" autofocus autocomplete="off" maxlength=40><br>
-        <input id="password" type="password" placeholder="Password" autocomplete="off" onkeydown = "if (event.keyCode == 13) document.getElementById('submit').click()"><br>
+		<br>
+		<label for="username" style="font-size: 0">Username
+        <input id="username" name="username" placeholder="Username" autofocus autocomplete="off" maxlength=40>
+        </label>
+
+        <br>
+        <label for="password" style="font-size: 0">Password
+        <input id="password" name="password" type="password" placeholder="Password" autocomplete="off" onkeydown = "if (event.keyCode == 13) document.getElementById('submit').click()">
+        </label>
+
+        <br>
 		<small class="opt-stuff" onclick="showPassword()" id="show_password">Show password</small>
 		<br><br>
         <button id="submit" class="button-color">I'm not a cat!</button>
