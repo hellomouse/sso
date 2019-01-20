@@ -220,7 +220,7 @@
 
         <input id="username" placeholder="Username" autofocus autocomplete="off" maxlength=40><br>
         <input id="password" type="password" placeholder="Password" autocomplete="off" onkeydown = "if (event.keyCode == 13) document.getElementById('submit').click()"><br>
-		<small class="opt-stuff" onclick="showPassword()" id="show_password">Show password</small> &nbsp;&nbsp;&nbsp; <small class="opt-stuff" onclick="localStorage.setItem('bowserinator-styles', '0')">I am a bad person</small>
+		<small class="opt-stuff" onclick="showPassword()" id="show_password">Show password</small>
 		<br><br>
         <button id="submit" class="button-color">I'm not a cat!</button>
 		<p id="msg"></p>
@@ -235,10 +235,15 @@
         let backgrounds = [['default', 0], ['izuna', 7]] // [[category, numberofimages]]
         let background = backgrounds[0] // Default please
 
+		// Usernames hashed via md5
 		let userPreferences = {
 			'63749376e9c181d86dad653534a5af2e': [1],
 			'bf50bee76eade0b4919a0de3ab4376d9': [1]
 		}
+
+		// default please
+		let imageId = Math.floor(Math.random() * background[1]) + 1 + '.png';
+		document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + background[0] + "/" + imageId + "')";
 
 		let localStorage = window.localStorage; // Alias
 		let found = false;
