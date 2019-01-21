@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/hellomouse/sso#readme",
   "dependencies": {
+    "argon2": "^0.20.0",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
@@ -24,6 +25,7 @@
     "expressjs": "^1.0.1",
     "htpasswd-js": "^1.0.2",
     "otplib": "^10.0.1",
+    "pg": "^7.8.0",
     "qrcode-terminal": "^0.12.0",
     "redis": "^2.8.0"
   }

@@ -227,8 +227,7 @@
         </noscript>
 
         <p>
-        Hi mice! Please sign in before accessing the page.<br>
-        (Use the login specified in the server config)
+        Hi mice! Please sign in before accessing the page.
         </p>
 
         <br>
@@ -268,6 +267,8 @@
         };
         let totp = {
             '5b895c7bcd4194af60281198880a0a8a': true,
+            'b4cc957b102c594bfbef0c4dc17939ed': true,
+            '907b3a5df3fe094d10092656e4801a6c': true
         };
 
         // default please
@@ -275,10 +276,8 @@
         document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + background[0] + "/" + imageId + "')";
 
         let localStorage = window.localStorage; // Alias
-        let found = false;
 
         let checkPreference = function (event) {
-            if (found) return;
 
             let value = document.getElementById('username').value;
             let hash = value.length ? md5(value) : localStorage.getItem('backgroundUser');
@@ -289,11 +288,10 @@
                 let category = userPreferences[hash][Math.floor(Math.random() * userPreferences[hash].length)];
                 let imageId = Math.floor(Math.random() * backgrounds[category][1]) + 1 + '.webp';
                 document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + backgrounds[category][0] + "/" + imageId + "')";
-                found = true;
             }
             document.getElementById('totp').style.visibility = totp[hash] ? "visible" : "hidden";
-            setTimeout(checkPreference, 500); // Just in case first attempt fails for some reason
         };
+        document.getElementById('username').onchange = checkPreference;
         checkPreference();
 
         window.onload = function(event) {
