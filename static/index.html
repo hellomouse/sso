@@ -356,6 +356,7 @@
             var data = {};
             data['user'] = document.getElementById('username').value;
             data['password'] =  document.getElementById('password').value;
+            if(data['password'].length < 8) return alert("NIST SAYS YOU ARE DUMB SO PLEASE FIX YOUR SHIT");
             data['totp'] =  document.getElementById('totp').value;
 
             // Background. If username in localstorage is not equal to value when submitted

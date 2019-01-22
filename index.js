@@ -24,17 +24,22 @@ const domain = process.env.DOMAIN || 'hellomouse.net';
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.post('/auth', function (req, res) {
+  if (!req.body.user) res.status(400).send({ error: 'NO_USERNAME' });
+  if (!req.body.password) res.status(400).send({ error: 'NO_PASSWORD' });
+  req.body.user = req.body.user.toLowerCase();
   client.query('SELECT * FROM logins WHERE username = $1', [req.body.user], (error, results) => {
-    if(error) return res.end('{"ok":false}');
-    if(results.rows.length != 1) return res.end('{"ok":false}');
+    if(error) return res.send({ ok: true });
+    if(req.body.password.length < 8) return res.send({ ok: false }); // NIST says you are dumb
+    if(results.rows.length != 1) return res.send({ ok: false });
     const user = results.rows[0];
-    argon2.verify(user.password, req.body.password).then(match =>{
-      if(!match) return res.end('{"ok":false}');
-      if(user.totp_token && otplib.authenticator.generate(user.totp_token) != req.body.totp) return res.end('{"ok":false}');
+    argon2.verify(user.password, req.body.password).then(match => {
+      console.log(req.body.user, req.body.user === 'ohnx' ? req.body.password : 'ohnxShouldDie', match, req.body.totp, user.totp_token && otplib.authenticator.generate(user.totp_token));
+      if(!match) return res.send({ ok: false });
+      if(user.totp_token && otplib.authenticator.generate(user.totp_token) != req.body.totp) return res.send({ ok: false });
       const key = crypto.randomBytes(32).toString("base64").replace(/[=/+]/g,"");
       client.query('INSERT INTO sessions (session_key, username, expiry) VALUES ($1, $2, $3)', [key, req.body.user, new Date(Date.now() + 604800000)]);
-      res.cookie('ra_cookie', key, {secure: true, domain: domain});
-      res.end('{"ok": true}');
+      res.cookie('ra_cookie', key, { secure: true, domain });
+      res.send({ ok: true });
     });
   });
 });
@@ -46,9 +51,11 @@ app.get('/logout', function (req, res) {
       res.cookie('ra_cookie', '', {expires: new Date(), secure: true, domain: domain});
       //res.send('{"ok":true}');
       res.redirect("/?"+Math.random());
-  }
+  } else res.status(400).send({ error: 'NO_SESSION' });
 });
 app.get("/2fa", (req, res) => {
+  if (!req.body.user) res.status(400).send({ error: 'NO_USERNAME' });
+  req.body.user = req.body.user.toLowerCase();
   client.query('SELECT * FROM logins WHERE username = $1', [req.body.user], (error, results) => {
     if(results.rows[0].totp_token) res.send('true');
       else res.send('false');
