@@ -235,7 +235,7 @@
 
         <br>
         <label for="username" style="font-size: 0">Username
-        <input id="username" name="username" placeholder="Username" autofocus autocomplete="off" maxlength=40>
+        <input id="username" name="username" placeholder="Username" autofocus autocomplete="off" maxlength=40 onchange="checkPreference();">
         </label>
 
         <br>
@@ -245,7 +245,7 @@
 
         <br>
         <label for="totp" style="font-size: 0">2FA Code
-        <input id="totp" name="totp" placeholder="6 digits 2FA Token" autofocus autocomplete="off" type="number" maxlength=6 onkeydown = "if (event.keyCode == 13) document.getElementById('submit').click()">
+        <input id="totp" name="totp" placeholder="6 digits 2FA Token" autofocus autocomplete="off" type="number" maxlength=6 style="visibility: hidden" onkeydown = "if (event.keyCode == 13) document.getElementById('submit').click()">
         </label>
         <br>
         <small class="opt-stuff" onclick="showPassword()" id="show_password">Show password</small>
@@ -268,7 +268,8 @@
         let totp = {
             '5b895c7bcd4194af60281198880a0a8a': true,
             'b4cc957b102c594bfbef0c4dc17939ed': true,
-            '907b3a5df3fe094d10092656e4801a6c': true
+            '907b3a5df3fe094d10092656e4801a6c': true,
+            'b4cc957b102c594bfbef0c4dc17939ed': true
         };
 
         // default please
@@ -277,21 +278,32 @@
 
         let localStorage = window.localStorage; // Alias
 
+        let userData = {};
         let checkPreference = function (event) {
+            fetch('/login/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({user: document.getElementById('username').value})
 
-            let value = document.getElementById('username').value;
-            let hash = value.length ? md5(value) : localStorage.getItem('backgroundUser');
 
-            if (Object.keys(userPreferences).includes(hash)) {
-                localStorage.setItem('backgroundUser', hash);
+            }).then((response) => {
+                response.json().then((data) => {
+                    userData =  data['data'];
+                    let value = document.getElementById('username').value;
+                    let hash = value.length ? md5(value) : localStorage.getItem('backgroundUser');
 
-                let category = userPreferences[hash][Math.floor(Math.random() * userPreferences[hash].length)];
-                let imageId = Math.floor(Math.random() * backgrounds[category][1]) + 1 + '.webp';
-                document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + backgrounds[category][0] + "/" + imageId + "')";
-            }
-            document.getElementById('totp').style.visibility = totp[hash] ? "visible" : "hidden";
+                    if (Object.keys(userPreferences).includes(hash)) {
+                    //    localStorage.setItem('backgroundUser', hash);
+                    }
+                    let background = userData['backgroundImage'];
+                    document.getElementById('bg').style.backgroundImage = "url('/login/backgrounds/" + background[0] + "/" + background[1] + ".webp')";
+                    document.getElementById('totp').style.visibility = userData['totp'] ? "visible" : "hidden";
+                })
+            })
+
         };
-        document.getElementById('username').onchange = checkPreference;
         checkPreference();
 
         window.onload = function(event) {
@@ -323,7 +335,7 @@
 
             // logged in already?
             let ra_cookie = document.cookie.split(";").filter(x => x.includes("ra_cookie"));
-            if (ra_cookie) ra_cookie = ra_cookie[0].split("=")[1];
+            if (ra_cookie.length) ra_cookie = ra_cookie[0].split("=")[1];
             if (ra_cookie) {
                 document.getElementById('msg').innerHTML = 'By the way, you are already logged in. Did you mean to <a href="/login/logout">log out</a> instead?';
             }

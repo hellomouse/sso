@@ -2,8 +2,9 @@ const argon2 = require('argon2');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const crypto = require("crypto");
-const otplib = require("otplib");
+const crypto = require('crypto');
+const otplib = require('otplib');
+const readdir = require('fs').readdir;
 const Client = require('pg').Client
 const client = new Client({
   user: 'hellomouse',
@@ -55,12 +56,43 @@ app.get('/logout', function (req, res) {
 });
 app.get("/2fa", (req, res) => {
   if (!req.body.user) res.status(400).send({ error: 'NO_USERNAME' });
-  req.body.user = req.body.user.toLowerCase();
+  req.body.user = req.body.user ? req.body.user.toLowerCase() : '';
   client.query('SELECT * FROM logins WHERE username = $1', [req.body.user], (error, results) => {
     if(results.rows[0].totp_token) res.send('true');
       else res.send('false');
   });
 });
+
+let backgroundImageCategoryCounts = {};
+function updateBackgroundCount() {
+  readdir('./static/backgrounds', (error, list) => {
+    if (error) return console.log(error);
+    list.forEach((category) => {
+      readdir(`./static/backgrounds/${category}/`, (error, list) => {
+        if (error) return console.log(error);
+        backgroundImageCategoryCounts[category] = list.length;
+      })
+    })
+  })
+}
+setInterval(updateBackgroundCount, 3.6*(10**6)) // Execute hourly
+updateBackgroundCount();
+
+app.post('/user', function (req, res) {
+  let data = {};
+  let user = req.body.user;
+  client.query('SELECT totp_token FROM logins WHERE username = $1', [user], (error, results) => {
+    if (error) return res.status(404).send({error: true, description  : 'Not Found'});
+      data['totp'] = Boolean(results.rows.length == 1 && results.rows[0].totp_token);
+      client.query('SELECT loginbackgroundcategories FROM userPreferences WHERE username = $1;', [user], (error, results) => {
+        let category = results.rows.length ? results.rows[0].loginbackgroundcategories[Math.floor(Math.random() * results.rows[0].loginbackgroundcategories.length)] : 'default';
+        let imageNumber = Math.ceil(Math.random() * backgroundImageCategoryCounts[category]);
+        data['backgroundImage'] = [category, imageNumber];
+        return res.status(200).send( {data} );
+      })
+  })
+})
+
 /* send static assets */
 app.use('/', express.static('static'));
 
