@@ -22,7 +22,7 @@ let shouldTotp = process.argv[4] === 'true';
 
 const secret = otplib.authenticator.generateSecret();
 argon2.hash(process.argv[3]).then(hash => {
-    client.query("INSERT INTO logins (username, password, totp_token) VALUES ($1, $2, $3) ON CONFLICT UPDATE", [
+    client.query("INSERT INTO logins (username, password, totp_token) VALUES ($1, $2, $3) ON CONFLICT (username) DO UPDATE SET password=EXCLUDED.password, totp_token=EXCLUDED.totp_token", [
         process.argv[2].toLowerCase(),
         hash,
         shouldTotp ? secret : null
@@ -31,6 +31,7 @@ argon2.hash(process.argv[3]).then(hash => {
 
 if(shouldTotp) {
     qrcode.generate(`otpauth://totp/Hellomouse:${process.argv[2]}?secret=${secret}&issuer=Hellomouse`);
+    setTimeout(function(){
     console.log(secret);
     process.stdin.setRawMode(true);
     process.stdin.resume();
@@ -39,4 +40,5 @@ if(shouldTotp) {
         console.log(otplib.authenticator.generate(secret));
         process.exit(0);
     });
+}, 2000);
 }
