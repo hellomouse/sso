@@ -1,6 +1,11 @@
 # sso
 The hellomouse Single Sign-On solution
 
+## ⚠️⚠️ big red thingy ⚠️⚠️
+
+Hi, this repository is no longer maintained since Hellomouse has moved away from a hacky SSO to a proper Kerberos system.
+
+
 ## Plan
 
 ```
